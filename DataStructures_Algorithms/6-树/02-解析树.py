@@ -17,23 +17,23 @@ op = {
 def build_parse_tree(exp_string):
     exp_list = exp_string.split()  # 表达式符号列表
     parent_stack = Stack()  # 存储父节点的栈
-    parse_tree = BinaryTree()  # 解析树
+    parse_tree = BinaryTree('')  # 解析树
     node = parse_tree  # 当前节点
 
     for char in exp_list:
         if char == '(':
             # 创建并切换到左子节点
             parent_stack.push(node)
-            node.insert_left()
-            node = node.left_child
+            node.insertLeft('')
+            node = node.leftChild
         elif char in '+-*/':
             # 切换回父节点，设置父节点的值
             node = parent_stack.pop()
             node.data = char
             # 创建并切换到右子节点
             parent_stack.push(node)
-            node.insert_right()
-            node = node.right_child
+            node.insertRight('')
+            node = node.rightChild
         elif char in ')':
             # 切换回父节点
             node = parent_stack.pop()
@@ -48,7 +48,7 @@ def build_parse_tree(exp_string):
 
 # 计算解析树的结果
 def evaluate(parse_tree: BinaryTree):
-    left, right = parse_tree.left_child, parse_tree.right_child
+    left, right = parse_tree.leftChild, parse_tree.rightChild
     if left is None and right is None:
         return parse_tree.data
 
@@ -59,7 +59,7 @@ def evaluate(parse_tree: BinaryTree):
 def postorder_eval(tree: BinaryTree):
     if tree is None:
         return
-    left, right = postorder_eval(tree.left_child), postorder_eval(tree.right_child)
+    left, right = postorder_eval(tree.leftChild), postorder_eval(tree.rightChild)
     if left is None and right is None:
         return tree.data
 
@@ -70,11 +70,11 @@ def postorder_eval(tree: BinaryTree):
 def inorder_exp(tree: BinaryTree):
     if tree is None:
         return ''
-    if tree.left_child is None and tree.right_child is None:
+    if tree.leftChild is None and tree.rightChild is None:
         return tree.data
 
-    exp_list = ['(', str(inorder_exp(tree.left_child)),
-                tree.data, str(inorder_exp(tree.right_child)), ')']
+    exp_list = ['(', str(inorder_exp(tree.leftChild)),
+                tree.data, str(inorder_exp(tree.rightChild)), ')']
     return ' '.join(exp_list)
 
 
