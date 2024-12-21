@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 
 import turtle
@@ -81,6 +82,7 @@ class Maze:
         self.screen.tracer(0)
         for y in range(self.max_row):
             for x in range(self.max_col):
+                print(self.maze_list[y][x])
                 if self.maze_list[y][x] == OBSTACLE:
                     self.draw_center_rect(x, y, 'tan')
         self.turtle.up()
@@ -170,5 +172,5 @@ if __name__ == '__main__':
     screen = turtle.Screen()
     maze = Maze(MAZE_FILE, screen)
     maze.draw_maze()
-    search_maze(maze)
+    # search_maze(maze)
     screen.exitonclick()
