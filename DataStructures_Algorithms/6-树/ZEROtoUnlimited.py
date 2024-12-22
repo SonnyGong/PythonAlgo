@@ -1,3 +1,6 @@
+from stack_test import Stack
+
+
 class BinaryTree:
     def __init__(self,rootObj):
         self.key = rootObj
@@ -33,6 +36,20 @@ class BinaryTree:
     def getRootval(self):
         return self.key
 
+def buildParaseTree(fpexp):
+    fplist = fpexp.split()
+    pStack = Stack()
+    eTree = BinaryTree('')
+    pStack.push(eTree)
+    currentTree = eTree
+    for i in fplist:
+        if i == '(':
+            currentTree.insertLeft('')
+            pStack.push(currentTree)
+            currentTree = currentTree.getLeftChild()
+
+        elif i not in '+-*/)':
+            currentTree
 
 
 if __name__ == '__main__':
