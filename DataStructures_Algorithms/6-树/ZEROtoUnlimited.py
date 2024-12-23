@@ -1,4 +1,6 @@
-from stack_test import Stack
+import operator
+
+from PythonAlgo.stack_test import Stack
 
 
 class BinaryTree:
@@ -49,16 +51,55 @@ def buildParaseTree(fpexp):
             currentTree = currentTree.getLeftChild()
 
         elif i not in '+-*/)':
-            currentTree
+            currentTree.setRootval(eval(i))
+            parent = pStack.pop()
+            currentTree = parent
+
+        elif i in '+-*/':
+            currentTree.setRootval(i)
+            currentTree.insertRight('')
+            pStack.push(currentTree)
+            currentTree = currentTree.getRightChild()
+
+        elif i == ')':
+            currentTree = pStack.pop()
+        else:
+            raise ValueError('Illegal input'+ i)
+
+    return eTree
+
+
+def evaluate(parseTree):
+    opers = {'+':operator.add,'-':operator.sub,'*':operator.mul,'/':operator.truediv}
+    leftC = parseTree.getLeftChild()
+    rightC = parseTree.getRightChild()
+    if leftC and rightC:
+        fn = opers[parseTree.getRootVal()]
+        return fn(evaluate(leftC),evaluate(rightC))
+
+    else:
+        return parseTree.getRootval()
+
+class TreeNode:
+    def __init__(self, key, val, left=None, right=None, parent=None):
+        self.key = key
+        self.payload = val
+        self.leftChild = left
+        self.rightChild = right
+        self.parent = parent
+    def hasLeftChild(self):
+        return self.leftChild is not None
 
 
 if __name__ == '__main__':
-    r = BinaryTree('a')
-    print(r.getRootval())
-    print(r.getLeftChild())
-    r.insertLeft('b')
-    print(r.getLeftChild())
-    print(r.getLeftChild().getRootval())
+    test = TreeNode(1,2)
+    print(test.hasLeftChild())
+    # r = BinaryTree('a')
+    # print(r.getRootval())
+    # print(r.getLeftChild())
+    # r.insertLeft('b')
+    # print(r.getLeftChild())
+    # print(r.getLeftChild().getRootval())
 
 
 
