@@ -42,10 +42,23 @@ def quick_sort(arr, first=0, last=None):
         quick_sort(arr, split_point + 1, last)
 
 
-if __name__ == '__main__':
-    arr = [54, 26, 93, 17, 77, 31, 44, 55, 20]
-    seq = simple_quick_sort(arr[:])
-    print(f'快速排序的结果: {seq}')
+def quick(arr):
+    if len(arr) <= 1:
+        return arr
+    left, right = [], []
+    first = arr[0]
+    for single in arr[1:]:
+        if single < first:
+            left.append(single)
+        else:
+            right.append(single)
+    return quick(left) + [first] + quick(right)
 
-    quick_sort(arr)
-    print(f'原地快速排序的结果: {arr}')
+if __name__ == '__main__':
+    print(quick([2,1]))
+    # arr = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+    # seq = simple_quick_sort(arr[:])
+    # print(f'快速排序的结果: {seq}')
+    #
+    # quick_sort(arr)
+    # print(f'原地快速排序的结果: {arr}')
