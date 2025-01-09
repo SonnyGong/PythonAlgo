@@ -55,7 +55,7 @@ def quick(arr):
     return quick(left) + [first] + quick(right)
 
 if __name__ == '__main__':
-    print(quick([2,1]))
+    print(quick([0,3,7,2,5,8,4,6,0,1]))
     # arr = [54, 26, 93, 17, 77, 31, 44, 55, 20]
     # seq = simple_quick_sort(arr[:])
     # print(f'快速排序的结果: {seq}')
